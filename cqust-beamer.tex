@@ -1,0 +1,1529 @@
+\documentclass[aspectratio=169, 10pt, utf8, mathserif]{beamer}
+%调用相关的宏包
+\usepackage{colortbl} % 彩色表格
+\usepackage{dcolumn}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{boxedminipage}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{alltt}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{multimedia}
+\usepackage{color}% [usenames]
+\usepackage{hyperref}
+%\usepackage[T1]{fontenc}
+\graphicspath {{figure/}}%图片所在的目录
+\usepackage{multicol}    %同时使用单列和多列，分栏，如下
+\usepackage{setspace} % 调整间距
+%\begin{spacing}{1.5}
+%\tableofcontents \listoffigures \listoftables
+%\end{spacing}
+
+\usepackage{ctex} %中文包
+\usepackage{amsfonts}
+\usepackage{booktabs} %表格功能包,可以使用三线表
+\usepackage{multirow} %合并多行表格
+\usepackage{enumerate} %有序编号
+\usepackage{xcolor} %代码高亮包
+\usepackage{listings} %代码包
+\lstset{
+	language=Matlab, %代码语言使用的是matlab，Python
+	basicstyle=\ttfamily, % 设置字体族
+	frame=shadowbox, %边框，把代码用带有阴影的框圈起来
+	% framesep=1em, % 设置边框与代码的距离
+	rulesepcolor=\color{red!20!green!20!blue!20}, %代码块边框为淡青色
+	keywordstyle=\color{blue}\bfseries, %代码关键字的颜色为蓝色，粗体
+	morekeywords={} % 设置更多的关键字，用逗号分隔
+	commentstyle=\color{red}\textit, %设置代码注释的颜色
+	showstringspaces=false, %不显示代码字符串中间的空格标记
+	numbers=left, %显示行号在左边
+	numbersep=2em, % 设置行号的具体位置
+	numberstyle=\tiny, %行号字体
+	emph={self}, % 指定强调词，如果有多个，用逗号隔开
+    emphstyle={\bfseries\color{Rhodamine}}, % 强调词样式设置
+	stringstyle=\ttfamily, %代码字符串的特殊格式
+	breaklines=true, %过长的代码自动换行
+	columns=flexible, %代码紧凑一点
+	extendedchars=false,  %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+	texcl=true}
+
+
+
+\setlength{\columnsep}{-0.05cm} %双栏之间的间距
+%\setlength{\parskip}{-0.1\baselineskip} % 设置段间距
+
+%--设置字体，一定要用XeLatex模式编译。这里设置为最常用的Times New Roman.
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+
+\usetheme{Berlin}   %[hideothersubsections] beamer 这是模板!!!!!!!!
+% Warsaw or ...,Antibes,PaloAlto,Darmstadt,Frankfurt,Boadilla,Antibes,Luebeck,CambridgeUS,Rochester, default
+%%  With navigation bar: default, boxes, Bergen, Madrid, Pittsburgh, Rochester
+%%  With a treelike navigation bar: Antibes, JuanLesPins, Montpellier.
+%%  With a TOC sidebar: Berkeley, PaloAlto, Goettingen, Marburg, Hannover
+%%  With a mini frame navigation: Berlin, Ilmenau, Dresden, Darmstadt, Frankfurt, Singapore, Szeged
+%%  With section and subsection titles: Copenhagen, Luebeck, Malmoe, Warsaw
+
+%  \usefonttheme[onlylarge]{structuresmallcapsserif}%
+%  \usefonttheme[onlysmall]{structurebold}%
+%  \usefonttheme{serif} % Times New Rome 字体
+\usecolortheme{whale}% default%这个是具体模板下的颜色配置!赞!!!!!!!
+%% Inner color themes, 其他选择: orchid,albatross,beaver,beetle,default,crane,dolphin,dove,fly,orchid,lily,rose,seagull,seahorse
+%% Inner color themes, 其他选择: sidebartab,whale,wolverine
+
+\useinnertheme[shadow=true]{rounded} % default,circles,margin,rounded,rectangles
+%%  \useoutertheme{split} % default，infolines，miniframes,shadow,smoothbars,smoothtree,tree,sidebar
+
+%  \useoutertheme[height=0.1\textwidth,width=0.15\textwidth,hideothersubsections]{sidebar}
+\setbeamercovered{dynamic} % dynamic,transparent,invisible
+  % or whatever (possibly just delete it)
+
+%% beamer中已经定义的颜色：
+%% red,green,blue,cyan,magenty,yellow,black,darkgray,gray,lightgray,orange,violet,purple,brown
+
+%% 自定义颜色：
+%% \xdefinecolor{lanvendar}{rgb}{0.8,0.6,1}
+%% \xdefinecolor{olive}{cmyk}{0.64,0,0.95,0.4}
+%% \colorlet{structure}{blue!60!black}
+\colorlet{structure}{blue!85!white}      %  自定义颜色,用“structure”表示 60%蓝色+40%黑色的颜色
+
+
+%\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=structure.fg!25] %%背景色, 上25%的蓝, 过渡到下白.
+%\beamertemplateshadingbackground{white}{blue!25} %设置渐变(gradient)背景色,
+%\beamersetaveragebackground{yellow!25} % 设置单一的(solid)背景色
+%\beamertemplategridbackground[0.3cm] % 设置栅格(grid ) 背景
+
+\def\hilite<#1>{\temporal<#1>{\color{blue!80}}{\color{blue!85!white}}{\color{black}}}% magenta
+%% 自定义命令, 源自 beamer_guide. item 逐步显示时, 使将要出现的item、正在显示的item、已经出现的item、 呈现不同颜色.
+
+
+% 设置用acrobat打开就会全屏显示
+\hypersetup{pdfpagemode=FullScreen}
+
+% Background   定义学校背景
+% \logo{\includegraphics[height=0.1\textwidth]{cqu_logo.png}} % 校徽logo
+
+% \pgfdeclareimage[width=\paperwidth,height=0.95\paperheight]{bg}{cqu_logo.pdf}
+% \setbeamertemplate{background}{\pgfuseimage{bg}}
+
+\pgfdeclareimage[height=0.8cm]{logo}{cqust_logo.pdf}
+\logo{\pgfuseimage{logo}}
+% \pgfdeclareimage[width=\paperwidth,height=0.95\paperheight]
+
+\setbeamertemplate{navigation symbols}{}   %% 去掉页面下方默认的导航条.
+\setcounter{tocdepth}{2} % 只生成2级目录
+\setcounter{secnumdepth}{2}
+\numberwithin{equation}{section} % 公式按章编号
+%\numberwithin{equation}{subsection} % 公式按节编号
+\numberwithin{figure}{section} % 图片按章编号
+
+\renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm} %  两端对齐
+\raggedright
+
+\setbeamertemplate{caption}[numbered] % 图表编号
+\setbeamerfont{caption}{size=\footnotesize} %  图表标题字体大小设置
+
+%%%%%%%%%%%%%%%%%% 调整第一页标题占位 %%%%%%%%%%%%%%%%%%%%
+ % \defbeamertemplate*{frametitle}{smoothbars theme}
+ %  {%
+ %    \nointerlineskip%
+ %    \begin{beamercolorbox}[wd=\paperwidth,leftskip=.3cm,rightskip=.3cm plus1fil,vmode]{frametitle}
+ %      \vskip.6ex
+ %      \usebeamerfont*{frametitle}\insertframetitle%
+ %      \vskip.6ex
+ %    \end{beamercolorbox}%
+ %  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 自定义页脚 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usefoottemplate{\hbox{\tinycolouredline{structure!80!black}{
+%\color{white}{ \insertshortauthor} \hfill{\insertshortinstitute }
+%\hfill{\insertframenumber\,/ \inserttotalframenumber}
+% \hfill{{\the\year}/{\the\month}/{\the\day}}
+%}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 中文字体%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\song}{\CJKfamily{song}}
+%\newcommand{\hei}{\CJKfamily{hei}}
+%\newcommand{\kai}{\CJKfamily{kai}}
+%\newcommand{\fs}{\CJKfamily{fs}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 中文环境 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newtheorem{theo}{{定理}} % \begin{theo}  \end{theo}
+%\newtheorem{prop}{{命题}}
+%\newtheorem{lem}{{引理}}
+%\newtheorem{corol}{{推论}}[theorem]
+%\newtheorem{def}{{定义}}
+%\newtheorem{exam}{{例}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 定理命题编号 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{theorems}[numbered]
+\newtheorem{exam}{Example}[section] % 按章编号
+
+
+%上面留白较多: Rochester dove
+%普通留白: default default 
+
+% $Header: /cvsroot/latex-beamer/latex-beamer/solutions/generic-talks/generic-ornate-15min-45min.en.tex,v 1.4 2004/10/07 20:53:08 tantau Exp $
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+% 每个章节都有小目录
+%\AtBeginSection[] {
+%  \begin{frame}<beamer>
+%    %\frametitle{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+% 每个小章节都有小目录
+%\AtBeginSubsection[] {
+%  \begin{frame}<beamer>
+%    %\frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->} % 逐行显示
+
+
+
+%--------------正文开始---------------
+\begin{document}
+
+\title[重庆科技学院\quad PPT写法] % (optional, use only with long paper titles)
+{ \textsc{PPT写法} }
+\subtitle{利用已有主题实现自己的主题}
+%\title{Antennas and Radio Wave Propagation}
+\author[吴昭] % (optional, use only with lots of authors)
+{\quad\\  \large  吴昭\\ {\scriptsize Email: 5706@qq.com}}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+\institute[重庆科技学院\quad 电气工程学院] % (optional, but mostly needed)
+{重庆科技学院\quad 电气工程学院}
+\date {\scriptsize{2020-08-01}}%日期强定
+%\date{\scriptsize{\today} }%{{\the\year}年{\the\month}月{\the\day}日}%% 日期自动生成
+% \date{\today}
+
+
+\begin{frame} % 封面
+  \vspace{0.5cm}
+  %\maketitle
+  \titlepage
+  \includegraphics[width=\paperwidth]{cqust_logo.pdf}
+  \hypertarget{beginning}{}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{目录}
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+\begin{frame}
+\frametitle{\textsc{前言}}
+\begin{itemize}
+\item\hilite<1> {\bf Prerequisitesheight 预修课程:}
+    \begin{itemize}
+    \item 电磁场
+    \item 电机学
+    \end{itemize}\pause
+
+\item\hilite<2> {\bf Textbook 教材:}
+    \begin{itemize}
+    \item 周衍柏\quad 《理论力学》
+    \item 郭硕鸿\quad 《电动力学》
+    \end{itemize}\pause   %pause是实现阴影高亮
+
+\item\hilite<3> {\bf Reference Books 参考书:}
+    \begin{itemize}
+    \item 朗道 \quad 理论力学
+    \item Griffiths \quad Introduction to Electrodynamics
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{\textsc{Contents}} \vspace{-0.3cm}
+  \tableofcontents[hidesubsections]
+  % You might wish to add the option[pausesections,subsection]
+\end{frame}
+
+
+
+
+
+\section{使用已有主题的方法}
+\subsection{主题样式颜色}
+\begin{frame}
+	\frametitle{使用已有主题的方法}
+可以直接点击该链接\underline{\href{https://mpetroff.net/files/beamer-theme-matrix/}{已有的主题样式和主题颜色}}。
+横栏表示主题颜色，纵栏表示主题样式。\\
+将想套用的主题样式和颜色放到usetheme{Szeged}和usecolortheme{beaver}中即可。
+\end{frame}
+
+\section{公式及编号}
+\subsection{带编号的公式}
+\begin{frame}
+	\frametitle{带编号的公式}
+现在展示一个带编号的公式：
+	\begin{equation}
+	f(x) = \frac{\mathrm e^{2x}}{\sin x}
+	\end{equation}
+\end{frame}
+
+\subsection{不带编号的公式}
+\begin{frame}
+	\frametitle{不带编号的公式}
+	另外再展示一个不带编号的公式。
+\[
+\mathrm e^{\mathrm i \pi} + 1 = 0 
+\]
+\end{frame}
+
+\subsection{行内公式}
+\begin{frame}
+	\frametitle{行内公式}
+	以及一个行内公式$a^2 + b^2 = c^2$.
+\end{frame}
+
+\section{列表环境}
+\subsection{无序列表和逐条展示的功能}
+\begin{frame}
+	\frametitle{列表}
+这是无序列表的样式，及逐条展示的功能。
+	\begin{itemize}
+	\item 无序列表标号1
+	\pause
+	\item 无序列表标号2
+	\end{itemize}
+\end{frame}
+
+\subsection{有序列表}
+\begin{frame}
+	\frametitle{有序列表}
+这是有序列表的样式及一次性的逐条展示功能。
+	\begin{enumerate}[<+-|alert@+>]
+	\item 这是1
+	\item 这是2
+	\end{enumerate}
+\end{frame}
+
+\section{块环境}
+\subsection{放某些特定的句子和公式}
+\begin{frame}
+	\frametitle{块环境}
+	\begin{block}{Beamer介绍}
+	Beamer是\LaTeX 的一个文档类，主要用于学术报告幻灯片的制作，优点是跨平台性好，支持Windows，Mac等。导出的格式就是PDF。
+	\end{block}
+	\begin{block}{Beamer介绍}
+	\begin{equation}
+	\left \{
+	\begin{aligned}
+	f(x) &= 2x + b \\
+	g(x) &= x + 9
+	\end{aligned}	
+	\right.
+	\end{equation}
+	\end{block}
+
+\end{frame}
+
+\section{代码环境}
+\begin{frame}[fragile] %must using [fragile]
+	\frametitle{MATLAB代码}  
+	\begin{lstlisting}
+	% 绘制图形
+	x = 1 : 0.01 : 5;
+	y = sin(x);
+	plot(x, y)
+	\end{lstlisting}
+\end{frame}
+
+
+\section{代码环境}
+\begin{frame}[fragile]
+	\frametitle{MATLAB代码}
+	\begin{lstlisting}[language=Python]  
+  import tensorflow as tf
+   x = 1 : 0.01 : 5;
+  \end{lstlisting}
+\end{frame}
+
+\section[Introduction 引言]{Introduction}\label{sec:1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 章首目录页 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%<beamer>
+    \frametitle{\textsc{Contents}} \vspace{-1.05cm}
+    \begin{multicols}{2}
+    %\begin{figure}
+    \begin{minipage}[t]{0.55\textwidth}
+    \tableofcontents[currentsection,hideallsubsections]
+    % [currentsection,hideallsubsections][sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+    \end{minipage}
+
+    \begin{minipage}[t]{0.55\textwidth}
+    \vspace{0.44cm}
+    \begin{spacing}{1.2} % 调整间距 需要\usepackage{setspace}
+    \begin{itemize}
+    \item\hyperlink{subsec:1-1}{背景与存在问题}
+    \item\hyperlink{subsec:1-2}{解决办法}
+    %\item\hyperlink{subsec:1-3}{Symbols and Notes}
+    %\item\hyperlink{subsec:1-4}{EM Spectrum}
+    \end{itemize}
+    \end{spacing}
+    \end{minipage}
+    %\end{figure}
+    \end{multicols}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[History and background]{背景与问题}\label{subsec:1-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{\textsc{背景, 问题}}%\transsplitverticalin
+
+\begin{itemize}
+\hilite<1>\item 惯性参照系: 使牛顿力学成立的参照系\pause
+
+\hilite<2>\item 牛顿力学的时空观: 伽利略变换
+\begin{align}
+&t'=t,\\
+&x'=x+vt,\\
+&y'=y,\\
+&z'=z.\pause
+\end{align}
+%\begin{figure}
+ % \begin{center}
+  %  \includegraphics[scale=0.4]{ch1/first_radio_link} % 图片名不能以大些字母开头
+  %\end{center}
+%\end{figure}
+
+\hilite<3>\item 伽利略相对性原理: %牛顿力学规律, 对一切惯性系变换不变.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{\textsc{History}} % \transsplitverticalout
+
+\begin{itemize}
+    \hilite<1>\item 惯性系问题\pause
+    \hilite<2>\item 速度无穷大问题\pause
+    \hilite<3>\item 电磁波: 波动介质问题, 波速问题
+\begin{align}\left.
+\begin{array}{l}
+\nabla\cdot\bm{E}=\frac{\rho}{\epsilon_0}\\
+\nabla\times\bm{B}=\mu_0\bm{J}+\mu_0\epsilon_0\frac{\partial\bm{E}}{\partial t},\\
+\nabla\cdot\bm{B}=0\\
+\nabla\times\bm{E}=-\frac{\partial\bm{B}}{\partial t}\end{array}
+\right\}\bm{E}=\bm{E}_0\cos(kx-\omega t),
+\end{align}
+\begin{align}
+c=\frac{\omega}{k}=\frac{1}{\sqrt{\mu_0\epsilon_0}}\nonumber
+\end{align}
+   % \begin{figure}
+    %\begin{center}
+     %   \includegraphics[scale=0.5]{ch1/antenna_marconi} % 图片名不能以大些字母开头
+    %\end{center}
+    %\end{figure}
+\end{itemize}
+%\rightline{\hyperlink{sec:1}{\beamerreturnbutton{back}} }
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[如何解决]{解决方案}\label{subsec:1-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{如何解决?}}%\transwipe % 涂抹效果
+
+\begin{itemize}% [<+-| structure@+>]
+\hilite<1>\item 光速不变原理\pause
+
+%\hilite<2>\item 1960s-1990s, advances made in computer architecture
+%and technology have had a major impact on the advance of modern
+%antenna technology, numerical methods were introduced that allowed
+%previously intractable complex antenna system configurations to be
+%analyzed and designed very accurately.
+\hilite<2>\item 狭义相对性原理: 一切物理规律在不同惯性系下形式相同
+\end{itemize}
+%\rightline{\hyperlink{sec:1}{\beamerreturnbutton{back}} }
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[相对论时空观的集中反映: 洛伦兹变换]{Lorentz transformation} %[误差校正基础]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 章首目录页 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%<beamer>
+    \frametitle{\textsc{Contents}} \vspace{-0.85cm}\label{sec:2}
+    \begin{multicols}{2}
+    \begin{minipage}[t]{0.55\textwidth}
+    \tableofcontents[currentsection,hideallsubsections]
+    % [currentsection,hideallsubsections][sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+    \end{minipage}
+
+    \begin{minipage}[t]{0.55\textwidth}
+    \vspace{0.5cm}
+    \begin{spacing}{0.9} % 调整间距 需要\usepackage{setspace}
+    \begin{itemize}
+        \item\hyperlink{subsec:2-1}{光速不变性导致间隔不变性}
+        \item\hyperlink{subsec:2-2}{由间隔不变, 导出洛伦兹变换}
+       % \item\hyperlink{subsec:2-3}{动尺收缩, 动~``程'' 延缓}
+       % \item\hyperlink{subsec:2-4}{Directivity and Gain}
+        %\item\hyperlink{subsec:2-5}{Antenna Apertures}
+        %\item\hyperlink{subsec:2-6}{Radio Communication Link}
+        %\item\hyperlink{subsec:2-7}{Fields From Dipole}
+        %\item\hyperlink{subsec:2-8}{Antenna Field Zones}
+        %\item\hyperlink{subsec:2-9}{Shape-Impedance Considerations}
+        %\item\hyperlink{subsec:2-10}{Polarization}
+    \end{itemize}
+    \end{spacing}
+    \end{minipage}
+    \end{multicols}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[光速不变性导致间隔不变性]{间隔不变性}\label{subsec:2-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{事件, 由光信号联系着的事件}}% \transblindshorizontal % 水平出现效果
+
+\begin{itemize}
+\hilite<1>\item 事件~$(ct,x,y,z)$. 两个由光联系着的事件, 在~$\Sigma$ 与~$\Sigma'$ 中分别有
+\begin{align}
+c^2t^2-x^2-y^2-z^2=0=c^2t'^2-x'^2-y'^2-z'^2.\pause
+\end{align}
+
+\hilite<2>\item 一般情况下, $c^2t^2-x^2-y^2-z^2\neq0$, then what is the relationship between them?
+\pause
+
+\hilite<3>\item So we still have
+\begin{align}
+c^2t^2-x^2-y^2-z^2=c^2t'^2-x'^2-y'^2-z'^2.\nonumber\\\nonumber
+\end{align}
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{某个空间下最重要的不变性/标量: 间隔}}
+
+
+\begin{itemize}
+
+\hilite<1>\item 因为~$c^2t^2-x^2-y^2-z^2$ 这个量的特殊性、重要性, 我们将它起个名字, 叫间隔, 记为
+\begin{align}
+ds^2=c^2dt^2-dx^2-dy^2-dz^2.\pause
+\end{align}
+
+\hilite<2>\item 逆变矢量~$x^\mu=(ct,x,y,z)$,
+
+协变矢量~$x_\mu=(ct,-x,-y,-z)$,
+\pause
+
+\hilite<3>\item 所以我们可得
+\begin{align}
+ds^2=dx^\mu dx_\mu.\nonumber
+\end{align}
+\end{itemize}
+
+
+
+
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{\textsc{不同时空具有不同的度规}}
+
+\begin{itemize}
+
+\hilite<1>\item 我们引入以下二阶对称张量
+\begin{align}
+g_{\mu\nu}=\left[
+\begin{array}{cccc}
+1&0&0&0\\
+0&-1&0&0\\
+0&0&-1&0\\
+0&0&0&-1
+\end{array}
+\right],
+\end{align}
+称为度规,\pause
+
+\hilite<2>\item 就可将间隔进一步表为
+\begin{align}
+ds^2=g_{\mu\nu}dx^\mu dx^\nu.\nonumber\pause
+\end{align}
+
+
+\hilite<3>\item 度规在广义相对论中, 具有更重要的作用.
+\end{itemize}
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[由间隔不变, 导出洛伦兹变换]{由间隔不变导出洛伦兹变换}\label{subsec:2-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{事件变换的一般关系}}
+
+\begin{itemize}
+
+\hilite<1>\item 简单分析, 不难得知, 两个惯性坐标系中看同一个事件的坐标关系为
+\begin{align}
+ct'=&act+bx,\\
+x'=&Act+Bx,\\
+y'=&y,\\
+z'=&z.\pause
+\end{align}
+
+
+\hilite<2>\item 利用间隔不变性~$c^2t'^2-x'^2=c^2t^2-x^2$, 即有
+\begin{align}
+\left.\begin{array}{c}
+a^2-A^2=1\\
+b^2-B^2=-1\\
+ab-AB=0
+\end{array}
+\right\}\Rightarrow
+\left\{\begin{array}{c}
+a=B,A=b,\\
+a^2-b^2=1.
+\end{array}\right.\nonumber
+\end{align}
+\end{itemize}
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{洛伦兹变换}}
+\begin{itemize}
+
+\hilite<1>\item 由前述结果, 可将变换进一步整理作
+\begin{align}
+ct'=&act+bx,\\
+x'=&bct+ax;
+\end{align}
+注意其中~$a^2-b^2=1$.\pause
+
+\hilite<2>\item $\Sigma'$ 中看自己原点的坐标恒为~$0$, $\Sigma$ 中看它是~$-vt$, 于是我们有
+\begin{align}
+0=bct-avt;
+\end{align}
+即
+\begin{align}
+\frac{b}{a}=\frac{v}{c}:=\beta.\nonumber
+\end{align}
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{洛伦兹变换}}
+\begin{itemize}
+
+\hilite<1>\item 由前述结果, 我们最终解得
+\begin{align}
+a=&\frac{1}{\sqrt{1-\frac{v^2}{c^2}}}:=\gamma,\\
+b=&\frac{v/c}{\sqrt{1-\frac{v^2}{c^2}}}=\beta\gamma.
+\end{align}
+
+\end{itemize}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{\textsc{洛伦兹变换}}
+\begin{itemize}
+
+
+\hilite<1>\item So at last, we get the final form of the Lorentz transformation:
+\begin{equation}
+\left\{
+\begin{aligned}
+ct'&=\frac{ct+\frac{v}{c}x}{\sqrt{1-\frac{v^2}{c^2}}},\\
+x'&=\frac{vt+x}{\sqrt{1-\frac{v^2}{c^2}}},\\
+y'&=y,\\
+z'&=z;\pause
+\end{aligned}
+\right.
+\end{equation}
+
+\hilite<2>\item Lorentz boost.%上述变换即同一事件在不同惯性系中的变换式, 亦称为洛伦兹变换在~$x$ 方向上的~boost.
+
+
+
+
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{\textsc{洛伦兹变换}}
+\begin{itemize}
+
+
+\hilite<1>\item 我们还可将上述变换用矩阵形式表为
+\begin{align}
+\left[
+\begin{array}{l}
+ct'\\x'\\y'\\z'
+\end{array}
+\right]=
+\left[
+\begin{array}{cccc}
+\gamma&\beta\gamma&0&0\\
+\beta\gamma&\gamma&0&0\\
+0&0&1&0\\
+0&0&0&1
+\end{array}
+\right]
+\left[
+\begin{array}{l}
+ct\\x\\y\\z
+\end{array}
+\right];
+\end{align}
+\end{itemize}
+
+%\rightline{\hyperlink{sec:2}{\beamerreturnbutton{back}} }
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[狭义相对论的时空观]{spacetime of SR}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 章首目录页 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%<beamer>
+    \frametitle{\textsc{Contents}} \vspace{-0.85cm}\label{sec:3}
+    \begin{multicols}{2}
+    \begin{minipage}[t]{0.55\textwidth}
+    \tableofcontents[currentsection,hideallsubsections]
+    % [currentsection,hideallsubsections][sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+    \end{minipage}
+
+    \begin{minipage}[t]{0.55\textwidth}
+    \vspace{0.6cm}
+    \begin{spacing}{0.9} % 调整间距 需要\usepackage{setspace}
+    \begin{itemize}
+        \item\hyperlink{subsec:3-1}{动尺收缩, 车库佯谬; 动~``程'' 延缓, 孪生子佯谬}
+        \item\hyperlink{subsec:3-2}{时空图, 因果律, 同时的相对性}
+        \item\hyperlink{subsec:3-3}{抵达宇宙尽头; 与过去人与未来人互动}
+      %  \item\hyperlink{subsec:3-4}{Waveguide Antennas}
+      %  \item\hyperlink{subsec:3-5}{Flat-Sheet Reflector Antennas}
+      %  \item\hyperlink{subsec:3-6}{Radio Communication Link}
+      %  \item\hyperlink{subsec:3-7}{Fields From Dipole}
+      %  \item\hyperlink{subsec:3-8}{Antenna Field Zones}
+      %  \item\hyperlink{subsec:3-9}{Shape-Impedance Considerations}
+    \end{itemize}
+    \end{spacing}
+    \end{minipage}
+    \end{multicols}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[动尺收缩]{shorter and slower}\label{subsec:3-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{\textsc{动尺收缩}}
+\begin{itemize}
+
+\hilite<1>\item 洛伦兹变换, 将使我们发现一个全新的世界观; 同时, 像两个铁球同时落地一样, 它将再一次更深刻地警醒我们: 感官体验是粗浅的, 更精确的规律依赖于更精确的现象的获得.\pause
+
+\hilite<2>\item 我们假设, $\Sigma'$ 系上有一根棍, 长为~$L'$, 问, 在~$\Sigma$ 上看来, 它长~$L$ 是多少?
+\begin{align}
+x'_1=\gamma\beta ct+\gamma x_1,\\
+x'_2=\gamma\beta ct+\gamma x_2,
+\end{align}
+两式相减即得
+\begin{align}
+L'=\gamma L, or~L=\sqrt{1-\frac{v^2}{c^2}}L'.\nonumber
+\end{align}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{\textsc{关于长度的几个佯谬}}
+\begin{itemize}
+
+\hilite<1>\item 车库到底能不能装下车子? 两端下雨的同时/不同时性;\pause 
+
+\hilite<2>\item 长棍到底会不会掉下冰缝? 重力改成两个人拉 (重力想象成两个一直拉, 下四同); 拉的同时/不同时性;\pause
+
+\hilite<3>\item 电路到底会不会被接通? 光传播有时间;\pause
+\hilite<4>\item 潜水艇是上浮还是下沉? 重力全向心或无重力下, 无浮力; 地面上~(海洋不下坠情况下): 浮力不基本, 是由大量水分子向下运动产生的, 光速穿行的飞船, 水分子来不及下移, 浮力规律不再是老样子. 前面说的, 有待商榷. 浮力对上下面的作用, 可以看成是瞬时的. 实现情况, 水在艇推动下产生形变与力, 不构成疑难; 在水是理想水的情况下, 这意思就是, 推开静之水/阻碍物, 却不受到任何反作用, 假设错误. 所以即便存在理想水 (被压不爆炸), 也不存在这种理想移动.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{\textsc{动~``程'' 延缓, 孪生子佯谬}}
+\begin{itemize}
+
+\hilite<1>\item 我们假设在~$\Sigma$ 系上某固定点处, 发生一段进程, 如吸烟, 则有
+\begin{align}
+ct'_1=\gamma ct_1+\beta\gamma x,\\
+ct'_2=\gamma ct_2+\beta\gamma x,
+\end{align}
+进而得知
+\begin{align}
+\Delta t'=\gamma \Delta t.\pause
+\end{align}
+
+
+\hilite<2>\item 到底谁更年轻, 谁更老?\pause
+\hilite<3>\item 双引信爆炸问题: 会不会炸?
+
+\end{itemize}
+
+%\rightline{\hyperlink{sec:3}{\beamerreturnbutton{back}} }
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[时空图, 因果律, 同时的相对性]{causality}\label{subsec:3-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{\textsc{(某事件的) 时空图, 光锥}}
+% \begin{figure}[!h]
+% \begin{center}
+% \includegraphics[width=4.3 cm]{figure/space.jpg}
+% \caption{间隔/时空区域的划分.}
+% \label{space}
+% \end{center}
+% \end{figure}
+% \end{frame}
+
+
+\begin{frame}
+\frametitle{\textsc{其它诸事件与某事件的间隔的分类}}
+\begin{itemize}
+\hilite<1>\item 类光间隔~$ds^2=0$, 光锥面\pause
+\hilite<2>\item 类时间隔~$ds^2>0$, 光锥内: 绝对未来, 绝对过去\pause
+\hilite<3>\item 类空间隔~$dx^2<0$, 光锥外: 回到未来, 突破因果?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\textsc{因果律, 相对与绝对}}
+\begin{itemize}
+\hilite<1>\item 因果律不可破: 有因果关系的事次序必不可变; 同时相对\pause
+\hilite<2>\item 四维量的三维分量观察: 长度, 时间相对\pause
+\hilite<3>\item 四维间隔标量, 四维坐标矢量, 四维速度/动量矢量, 绝对.
+\end{itemize}
+%\rightline{\hyperlink{sec:3}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[抵达宇宙尽头; 与过去人与未来人互动]{niubi}\label{subsec:3-3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{抵达宇宙尽头; 与过去人与未来人互动}}
+抵达宇宙尽头; 与过去人与未来人互动
+
+\rightline{\hyperlink{sec:3}{\beamerreturnbutton{back}} }
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[用相对论时空观修正的物理学]{用相对论时空观修正的物理学}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 章首目录页 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%<beamer>
+    \frametitle{\textsc{Contents}} \vspace{-1.05cm}\label{sec:4}
+    \begin{multicols}{2}
+    \begin{minipage}[t]{0.55\textwidth}
+    \tableofcontents[currentsection,hideallsubsections]
+    % [currentsection,hideallsubsections][sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+    \end{minipage}
+
+    \begin{minipage}[t]{0.55\textwidth}
+    \vspace{1.0cm}
+    \begin{spacing}{1.05} % 调整间距 需要\usepackage{setspace}
+    \begin{itemize}
+        \item\hyperlink{subsec:4-1}{相对论力学: 从四维协变量到质能等价}
+        \item\hyperlink{subsec:4-2}{电磁学天生相对论协变}
+      %  \item\hyperlink{subsec:4-3}{Power Theorem}
+       % \item\hyperlink{subsec:4-4}{Radiation Intensity}
+       % \item\hyperlink{subsec:4-5}{Examples of Power Patterns}
+       % \item\hyperlink{subsec:4-6}{Field Patterns}
+       % \item\hyperlink{subsec:4-7}{Phase Patterns}
+    \end{itemize}
+    \end{spacing}
+    \end{minipage}
+    \end{multicols}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[相对论力学: 从四维协变量到质能等价]{mass-energy equivalence}\label{subsec:4-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{四维速度矢量}}
+\begin{itemize}
+\hilite<1>\item 除了坐标四维矢量外, 最简单的是速度四维矢量 后者定义为
+\begin{align}
+V^\mu:=\frac{dx^\mu}{d\tau}=\gamma\frac{dx^\mu}{dt}=\gamma(c,\bm{V}).\pause
+\end{align}
+\hilite<2>\item 为什么这样做? 验证: 两个矢量合成一个标量:
+\begin{align}
+V^\mu V_\mu=\gamma^2c^2-\gamma^2 V^2=c^2.\nonumber
+\end{align}
+
+\end{itemize}
+%\rightline{\hyperlink{sec:4}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{\textsc{四维动量矢量}}
+\begin{itemize}
+
+\hilite<1>\item 于是, 动量四维矢量我们定义如下
+\begin{align}
+p^\mu:=&m_0V^\mu=(\gamma m_0c,\gamma m_0\bm{V})\nonumber\\
+=&(\frac{\gamma m_0c^2}{c},\bm{p})=(\frac{E}{c},\bm{p});\pause
+\end{align}
+\hilite<2>\item 上式中取 $E=\gamma m_0c^2$ 的原因, 是作泰勒展开可以发现~$\gamma m_0c^2=m_0c^2+\frac{1}{2}m_0v^2+\cdots$.
+
+
+
+
+\end{itemize}
+%\rightline{\hyperlink{sec:4}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{\textsc{伟大的质能等价现身}}
+\begin{itemize}
+
+\hilite<1>\item 于是我们发现, 当物体静止时, 仍有
+\begin{align}
+E_0=m_0c^2
+\end{align}
+的能量, 这称为质能等价;\pause
+
+\hilite<2>\item 而~$\frac{E^2}{c^2}-\bm{p}^2=m_0^2c^2$, 即
+\begin{align}
+E^2=\bm{p}^2c^2+m_0^2c^4,\nonumber
+\end{align}
+称为能动关系.
+
+\end{itemize}
+%\rightline{\hyperlink{sec:4}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[电磁学天生相对论协变]{电磁学天生相对论协变}\label{subsec:4-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{麦克斯韦方程的洛伦兹协变形式}}
+\begin{itemize}
+\hilite<1>\item 问: 电磁学规律, 即麦克斯韦方程, 是否洛伦兹协变?\pause
+\hilite<2>\item 麦克斯韦方程可写为
+\begin{gather}
+\partial_\mu F^{\mu\nu}=\mu_0J^\nu,\\
+\partial_\mu F_{\nu\rho}+\partial_\nu F_{\rho\mu}+\partial_\rho F_{\mu\nu}=0;
+\end{gather}
+即电磁学规律天生是四维协变的.
+
+\end{itemize}
+%\rightline{\hyperlink{sec:4}{\beamerreturnbutton{back}} }
+\end{frame}
+
+\begin{frame}
+\frametitle{\textsc{麦克斯韦方程的洛伦兹协变形式}}
+\begin{itemize}
+\hilite<1>\item 万有引力如何?\pause
+\hilite<2>\item Welcome to the lessons of 童校长!
+
+\end{itemize}
+%\rightline{\hyperlink{sec:4}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[狭义相对论与量子场论简介]{狭义相对论与量子场论简介}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 章首目录页 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%<beamer>
+    \frametitle{\textsc{Contents}} \vspace{-0.85cm}\label{sec:5}
+    \begin{multicols}{2}
+    \begin{minipage}[t]{0.55\textwidth}
+    \tableofcontents[currentsection,hideallsubsections]
+    % [currentsection,hideallsubsections][sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+    \end{minipage}
+
+    \begin{minipage}[t]{0.55\textwidth}
+    \vspace{1.1cm}
+    \begin{spacing}{1.05} % 调整间距 需要\usepackage{setspace}
+    \begin{itemize}
+        \item\hyperlink{subsec:5-1}{能动关系: 量子化的出发点}
+        \item\hyperlink{subsec:5-2}{自旋与场的关系}
+        %\item\hyperlink{subsec:5-3}{Array of Similar Sources}
+        %\item\hyperlink{subsec:5-4}{Array Pattern Synthesis}
+        %\item\hyperlink{subsec:5-5}{Array of Dissimilar Sources}
+        %\item\hyperlink{subsec:5-6}{Linear Array of n Isotropic Point Sources}
+        %\item\hyperlink{subsec:5-7}{Null Direction for Arrays}
+    \end{itemize}
+    \end{spacing}
+    \end{minipage}
+    \end{multicols}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[量子化的出发点]{量子化的出发点}\label{subsec:5-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{\textsc{非相对论量子力学}}
+\begin{itemize}
+\hilite<1>\item 一般所谓的量子力学, 指的是非相对论量子力学. How to get the Schrodinger's equation?\pause
+\hilite<2>\item 替换原则: 在经典能动关系~$T+V=E$ 中作代换~$\bm{p}\rightarrow -i\hbar\nabla,~E\rightarrow i\hbar\frac{\partial}{\partial t}$, 并作用在波函数上, 就得
+\begin{align}
+\left(-\frac{\hbar^2}{2m}\nabla^2+V\right)\psi(\bm{r},t)=i\hbar\frac{\partial}{\partial t}\psi(\bm{r},t)
+\end{align}
+此即薛定谔方程.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\textsc{相对论量子力学}}
+\begin{itemize}
+\hilite<1>\item 相对论能动关系, 我们再次写出为
+\begin{align}
+p^2=p^\mu p_\mu=m^2c^2, or~p^2-m^2=0.\pause
+\end{align}
+
+\hilite<2>\item 仍按之前的替换原则, 或现在紧凑地写为~$p^\mu=i\partial^\mu,~p_\mu=i\partial_\mu$, 并作用在波函数上, 就得
+\begin{align}
+(\partial^2+m^2)\phi=0.
+\end{align}
+此即~Klein-Gordon 方程.
+\end{itemize}
+%\rightline{\hyperlink{sec:5}{\beamerreturnbutton{back}} }
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[自旋与场的关系: 群表示论]{自旋与场的关系: 群表示论}\label{subsec:5-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{自旋与场的关系: 群表示论}}
+\begin{itemize}
+\hilite<1>\item 双曲三角函数有
+\begin{gather}
+\cosh x=\frac{e^x+e^{-x}}{2},~\sinh=\frac{e^x-e^{-x}}{2};\nonumber\\
+\cosh^2x-\sinh^2x=1;\pause
+\end{gather}
+
+\hilite<2>\item 而我们恰有~$\gamma^2-(\beta\gamma)^2=1$, 所以若我们令
+\begin{align}
+\gamma=\cosh\zeta,~\beta\gamma=\sinh\zeta,\nonumber
+\end{align}
+就可得
+
+
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{\textsc{自旋与场的关系: 群表示论}}
+
+\begin{align}
+\left[
+\begin{array}{l}
+ct'\\x'\\y'\\z'
+\end{array}
+\right]&=
+\left[
+\begin{array}{cccc}
+\cosh\zeta&\sinh\zeta&0&0\\
+\sinh\zeta&\cosh\zeta&0&0\\
+0&0&1&0\\
+0&0&0&1
+\end{array}
+\right]
+\left[
+\begin{array}{l}
+ct\\x\\y\\z
+\end{array}
+\right]\nonumber\\
+&=\exp\left[
+\begin{array}{cccc}
+0&\zeta&0&0\\
+\zeta&0&0&0\\
+0&0&0&0\\
+0&0&0&0
+\end{array}
+\right]
+\left[
+\begin{array}{l}
+ct\\x\\y\\z
+\end{array}
+\right].\nonumber
+\end{align}
+
+
+%\rightline{\hyperlink{sec:5}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{\textsc{自旋与场的关系: 群表示论}}
+
+于是一个一般的洛伦兹~boost 就是
+\begin{align}
+\left[
+\begin{array}{l}
+ct'\\x'\\y'\\z'
+\end{array}
+\right]
+=\exp\left[
+\begin{array}{cccc}
+0&\zeta_x&\zeta_y&\zeta_z\\
+\zeta_x&0&0&0\\
+\zeta_y&0&0&0\\
+\zeta_z&0&0&0
+\end{array}
+\right]
+\left[
+\begin{array}{l}
+ct\\x\\y\\z
+\end{array}
+\right].
+\end{align}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\textsc{自旋与场的关系: 群表示论}}
+
+洛伦兹变换的连续变换, 有六个, 三个~boost, 以及三个旋转; 后者以绕~$Z$ 轴正方向的旋转为例, 为:
+\begin{align}
+\left[
+\begin{array}{l}
+ct'\\x'\\y'\\z'
+\end{array}
+\right]=&
+\left[
+\begin{array}{cccc}
+1&0&0&0\\
+0&\cos\theta&\sin\theta&0\\
+0&-\sin\theta&\cos\theta&0\\
+0&0&0&1
+\end{array}
+\right]
+\left[
+\begin{array}{l}
+ct\\x\\y\\z
+\end{array}
+\right]\nonumber\\
+=&\exp\left[
+\begin{array}{cccc}
+0&0&0&0\\
+0&0&\theta&0\\
+0&-\theta&0&0\\
+0&0&0&0
+\end{array}
+\right]
+\left[
+\begin{array}{l}
+ct\\x\\y\\z
+\end{array}
+\right].\nonumber
+\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{\textsc{自旋与场的关系: 群表示论}}
+所以全部六个洛伦兹变换就可写为:
+\begin{align}
+\left[
+\begin{array}{l}
+ct'\\x'\\y'\\z'
+\end{array}
+\right]
+=\exp\left[
+\begin{array}{cccc}
+0&\zeta_x&\zeta_y&\zeta_z\\
+\zeta_x&0&\theta_z&-\theta_y\\
+\zeta_y&-\theta_z&0&\theta_x\\
+\zeta_z&\theta_y&-\theta_x&0
+\end{array}
+\right]
+\left[
+\begin{array}{l}
+ct\\x\\y\\z
+\end{array}
+\right];
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\textsc{自旋与场的关系: 群表示论}}
+\begin{itemize}
+\hilite<1>\item 洛伦兹变换的含义? 对矢量的变换作用\pause
+\hilite<2>\item 群表示得出自旋与场的关系: 洛伦兹变换对其它量的变换\pause
+\hilite<3>\item 狄拉克方程的严格导出.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\textsc{末片}}
+\begin{itemize}
+\hilite<1>\item 感谢大家!\pause
+\hilite<2>\item 你是你的大学, 与万门一起进步!
+
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[Radio Wave Propagation 电波传播]{Radio Wave Propagation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 章首目录页 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}%<beamer>
+    \frametitle{\textsc{Contents}} \vspace{-0.85cm}\label{sec:6}
+    \begin{multicols}{2}
+    \begin{minipage}[t]{0.55\textwidth}
+    \tableofcontents[currentsection,hideallsubsections]
+    % [currentsection,hideallsubsections][sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+    \end{minipage}
+
+    \begin{minipage}[t]{0.55\textwidth}
+    \vspace{3.3cm}
+    \begin{spacing}{1.2} % 调整间距 需要\usepackage{setspace}
+    \begin{itemize}
+        \item\hyperlink{subsec:6-1}{Basics}
+        \item\hyperlink{subsec:6-2}{Surface modes}
+        \item\hyperlink{subsec:6-3}{Ionospheric modes}
+        \item\hyperlink{subsec:6-4}{Direct modes}
+        \item\hyperlink{subsec:6-5}{Tropospheric modes}
+    \end{itemize}
+    \end{spacing}
+    \end{minipage}
+    \end{multicols}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[Basics 基础知识]{Basics}\label{subsec:6-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Radio propagation is the behavior of radio waves when they are
+%transmitted, or propagated from one point on the Earth to another,
+%or into various parts of the atmosphere.[1] As a form of
+%electromagnetic radiation, like light waves, radio waves are
+%affected by the phenomena of reflection, refraction, diffraction,
+%absorption, polarization and scattering.[2]
+
+%Radio propagation is affected by the daily changes of water vapor in
+%the troposphere and ionization in the upper atmosphere, due to the
+%Sun. Understanding the effects of varying conditions on radio
+%propagation has many practical applications, from choosing
+%frequencies for international shortwave broadcasters, to designing
+%reliable mobile telephone systems, to radio navigation, to operation
+%of radar systems.
+%
+%Radio propagation is also affected by several other factors
+%determined by its path from point to point. This path can be a
+%direct line of sight path or an over-the-horizon path aided by
+%refraction in the ionosphere, which is a region between
+%approximately 60 and 600 km.[3] Factors influencing ionospheric
+%radio signal propagation can include sporadic-E, spread-F, solar
+%flares, geomagnetic storms, ionospheric layer tilts, and solar
+%proton events.
+%
+%Radio waves at different frequencies propagate in different ways. At
+%extra low frequencies (ELF) and very low frequencies the wavelength
+%is very much larger than the separation between the earth's surface
+%and the D layer of the ionosphere, so electromagnetic waves may
+%propagate in this region as a waveguide. Indeed, for frequencies
+%below 20 kHz, the wave propagates as a single waveguide mode with a
+%horizontal magnetic field and vertical electric field.[4] The
+%interaction of radio waves with the ionized regions of the
+%atmosphere makes radio propagation more complex to predict and
+%analyze than in free space. Ionospheric radio propagation has a
+%strong connection to space weather. A sudden ionospheric disturbance
+%or shortwave fadeout is observed when the x-rays associated with a
+%solar flare ionize the ionospheric D-region.[citation needed]
+%Enhanced ionization in that region increases the absorption of radio
+%signals passing through it. During the strongest solar x-ray flares,
+%complete absorption of virtually all ionospherically propagated
+%radio signals in the sunlit hemisphere can occur.[citation needed]
+%These solar flares can disrupt HF radio propagation and affect GPS
+%accuracy.
+
+\begin{frame}%[shrink]
+\frametitle{\textsc{Basics}}
+
+\small
+
+\hilite<1>Radio waves propagation characteristics depends on both
+the medium structure characteristic and characteristic parameters of
+the waves.
+电波传播特性同时取决于媒质结构特性和电波的特征参量。\pause
+
+\hilite<2>In the atmosphere, radio propagation is affected by the
+daily changes of water vapor in the troposphere and ionization in
+the upper atmosphere, due to the Sun. Understanding the effects of
+varying conditions on radio propagation has many practical
+applications, from choosing frequencies for international shortwave
+broadcasters, to designing reliable mobile telephone systems, to
+radio navigation, to operation of radar systems.
+在大气层中，电波的传播与对流层中的水蒸气浓度以及大气层上层的带电离子浓度有关。
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{\textsc{Spectrum Properties}} \transblindshorizontal % 水平百叶窗效果
+% \vspace{-0.7cm}
+% \begin{figure}
+%   \begin{center}
+%     \includegraphics[width=11cm]{ch6/em_spectrum_properties} % 图片名不能以大些字母开头
+%   \end{center}
+% \end{figure}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}% [shrink]
+% \frametitle{\textsc{Opacity of the Atmosphere}}
+
+% \begin{figure}
+%   \begin{center}
+%     \includegraphics[width=11cm,height=6cm]{ch6/atmospheric_electromagnetic_opacity} % 图片名不能以大些字母开头
+%   \end{center}
+% \end{figure}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}% [shrink]
+\frametitle{\textsc{Main Mode of Radio Propagation}}
+
+\hilite<1>Wave of certain frequency and polarization matches medium
+with specific conditions, and will have a dominant mode of
+transmission.一定频率和极化的电波与特定媒质条件相匹配，将具有某种占优势的传播方式。\pause
+
+\hilite<2>Generally, radio waves propagate in the following modes:
+\begin{itemize}%{enumerate}[<+->]
+\item\hilite<2> Surface modes (ground wave)
+\item\hilite<2> Ionospheric modes (sky wave)
+\item\hilite<2> Direct modes (line-of-sight)
+\item\hilite<2> Tropospheric modes
+\end{itemize}%{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{Free space propagation}}
+
+
+
+\rightline{\hyperlink{sec:6}{\beamerreturnbutton{back}} }
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[Surface modes (groundwave) 地面波传播]{Surface modes}\label{subsec:6-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{Surface modes}}
+
+
+\rightline{\hyperlink{sec:6}{\beamerreturnbutton{back}} }
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[Ionospheric modes (skywave) 天波传播]{Ionospheric modes}\label{subsec:6-3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{Ionospheric modes}}
+
+
+\rightline{\hyperlink{sec:6}{\beamerreturnbutton{back}} }
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[Direct modes (line-of-sight) 视距传播]{Direct modes}\label{subsec:6-4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{Direct modes}}
+
+
+\rightline{\hyperlink{sec:6}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[Tropospheric modes 对流层散射传播]{Tropospheric modes}\label{subsec:6-5}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\textsc{Tropospheric modes}}
+
+
+\rightline{\hyperlink{sec:6}{\beamerreturnbutton{back}} }
+\end{frame}
+
+
+\begin{frame}
+	\zihao{-4}\centering{坚持学习，不是为了输赢。}
+\end{frame}
+
+
+
+
+
+\end{document}
+
+
+
+
+%  换页动态效果:
+%\transblindshorizontal<1> %  水平百叶窗效果
+%\transblindsvertical<2> %  竖直百叶窗效果
+%\transboxin<3> %  从中心到四角
+%\transboxout<4> %  从四角到中心
+%\transdissolve<5> %  溶解效果
+%\transglitter<6> %  闪烁
+%\transsplitverticalin<7> %  竖直撕开(向内)
+%\transsplitverticalout<8> %  竖直撕开(向外)
+%\transsplithorizontalin %  水平撕开(向内)
+%\transsplithorizontalout %  水平撕开(向外)
+%\transwipe<9> %  涂抹
+%\transduration<10>{1} %  渐出
+
+%%%%%% Latex 设置字体 %%%%%%
+
+%显示直立文本：     \textup{文本}
+%意大利斜体：       \textit{美元符文本美元符}
+%slanted斜体：      \textsl{文本}
+%显示小体大写文本： \textsc{文本}
+%中等权重：         \textmd{文本}
+%加粗命令：         \textbf{文本}
+%默认值：           \textnormal{文本}
+
+%Latex 设置字体大小命令由小到大依次为： \tiny \scriptsize
+%\footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
+
+% 超链及按钮
+%\hyperlink{sec:1}{\beamerreturnbutton{back}}
+% \beamerskipbutton, \beamerbutton, \beamergotobutton, 和 \beamerreturnbutton
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 环境 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{definitin} % 可选的还有：theorem, lemma, corollary, proposition, example, proof
+%  定义的例子。
+%\end{definition}
