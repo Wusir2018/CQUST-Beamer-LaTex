@@ -1,19 +1,18 @@
-\documentclass[aspectratio=169, 10pt, utf8, mathserif]{beamer}
+\documentclass[aspectratio=169, 10pt, utf8, mathserif]{beamer} 
+%设置为 Beamer 文档类型，设置字体为 10pt，长宽比为16:9，数学字体为 serif 风格
+
 %调用相关的宏包
 \usepackage{colortbl} % 彩色表格
-\usepackage{dcolumn}
-\usepackage{graphicx}
-\usepackage{subfigure}
-\usepackage{boxedminipage}
-\usepackage{bm}
-\usepackage{amsmath}
+\usepackage{dcolumn} % 更精细刻画列的特征，譬如说列的宽度等。
+\usepackage{graphicx,subfigure} %插图,子图
+\usepackage{boxedminipage} %带边框小页
+\usepackage{bm} % 公式中的粗体字符
+\usepackage{amsmath,amssymb,amsfonts} %数学公式,公式符号
 \usepackage[english]{babel}
-\usepackage{alltt}
-\usepackage{amssymb}
-\usepackage{times}
-\usepackage{multimedia}
-\usepackage{color}% [usenames]
-\usepackage{hyperref}
+\usepackage{times} %设置字体为Times New Roman
+\usepackage{multimedia} %嵌入音频或视频
+\usepackage{color,xcolor}% [usenames]字体颜色包
+\usepackage{hyperref} %超链接
 %\usepackage[T1]{fontenc}
 \graphicspath {{figure/}}%图片所在的目录
 \usepackage{multicol}    %同时使用单列和多列，分栏，如下
@@ -21,13 +20,10 @@
 %\begin{spacing}{1.5}
 %\tableofcontents \listoffigures \listoftables
 %\end{spacing}
-
 \usepackage{ctex} %中文包
-\usepackage{amsfonts}
 \usepackage{booktabs} %表格功能包,可以使用三线表
 \usepackage{multirow} %合并多行表格
 \usepackage{enumerate} %有序编号
-\usepackage{xcolor} %代码高亮包
 \usepackage{listings} %代码包
 \lstset{
 	language=Matlab, %代码语言使用的是matlab，Python
@@ -56,9 +52,14 @@
 %\setlength{\parskip}{-0.1\baselineskip} % 设置段间距
 
 %--设置字体，一定要用XeLatex模式编译。这里设置为最常用的Times New Roman.
+%\usepackage{fontspec}之前必须要有这两句
+\usefonttheme{professionalfonts} % using non standard fonts for beamer 
+\usefonttheme{serif} % default family is serif， Times New Rome 字体
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
-
+\setCJKmainfont{KaiTi}%中文字体采用黑体,Microsoft YaHei,FangSong,SimSun,KaiTi
+%  \usefonttheme[onlylarge]{structuresmallcapsserif}%字体主题
+%  \usefonttheme[onlysmall]{structurebold}%
 
 \usetheme{Berlin}   %[hideothersubsections] beamer 这是模板!!!!!!!!
 % Warsaw or ...,Antibes,PaloAlto,Darmstadt,Frankfurt,Boadilla,Antibes,Luebeck,CambridgeUS,Rochester, default
@@ -68,30 +69,25 @@
 %%  With a mini frame navigation: Berlin, Ilmenau, Dresden, Darmstadt, Frankfurt, Singapore, Szeged
 %%  With section and subsection titles: Copenhagen, Luebeck, Malmoe, Warsaw
 
-%  \usefonttheme[onlylarge]{structuresmallcapsserif}%
-%  \usefonttheme[onlysmall]{structurebold}%
-%  \usefonttheme{serif} % Times New Rome 字体
+
 \usecolortheme{whale}% default%这个是具体模板下的颜色配置!赞!!!!!!!
 %% Inner color themes, 其他选择: orchid,albatross,beaver,beetle,default,crane,dolphin,dove,fly,orchid,lily,rose,seagull,seahorse
 %% Inner color themes, 其他选择: sidebartab,whale,wolverine
 
-\useinnertheme[shadow=true]{rounded} % default,circles,margin,rounded,rectangles
-%%  \useoutertheme{split} % default，infolines，miniframes,shadow,smoothbars,smoothtree,tree,sidebar
+\useinnertheme[shadow=true]{rounded} % 选择内部主题，主要控制的是标题页、列表项目、定理环境、图标环境、脚注等再一帧之内的内容格式 default,circles,margin,rounded,rectangles
+%%  \useoutertheme{split} % 选择外部主题，外部主题主要控制的是幻灯片顶部尾部的信息栏、边栏、图标、帧标题等一帧之外的格式default，infolines，miniframes,shadow,smoothbars,smoothtree,tree,sidebar
 
 %  \useoutertheme[height=0.1\textwidth,width=0.15\textwidth,hideothersubsections]{sidebar}
-\setbeamercovered{dynamic} % dynamic,transparent,invisible
-  % or whatever (possibly just delete it)
-
+\setbeamercovered{dynamic} % 暂停时\pause下方文档半透明显示技巧：dynamic,transparent,invisible
 %% beamer中已经定义的颜色：
-%% red,green,blue,cyan,magenty,yellow,black,darkgray,gray,lightgray,orange,violet,purple,brown
+%%red,green,blue,cyan,magenty,yellow,black,darkgray,gray,lightgray,orange,violet,purple,brown
 
 %% 自定义颜色：
 %% \xdefinecolor{lanvendar}{rgb}{0.8,0.6,1}
 %% \xdefinecolor{olive}{cmyk}{0.64,0,0.95,0.4}
 %% \colorlet{structure}{blue!60!black}
 \colorlet{structure}{blue!85!white}      %  自定义颜色,用“structure”表示 60%蓝色+40%黑色的颜色
-
-
+%\setbeamertemplate{navigation symbols}{} %导航键设置
 %\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=structure.fg!25] %%背景色, 上25%的蓝, 过渡到下白.
 %\beamertemplateshadingbackground{white}{blue!25} %设置渐变(gradient)背景色,
 %\beamersetaveragebackground{yellow!25} % 设置单一的(solid)背景色
@@ -107,7 +103,7 @@
 % Background   定义学校背景
 % \logo{\includegraphics[height=0.1\textwidth]{cqu_logo.png}} % 校徽logo
 
-% \pgfdeclareimage[width=\paperwidth,height=0.95\paperheight]{bg}{cqu_logo.pdf}
+% \pgfdeclareimage[width=0.2\paperwidth,height=0.8\paperheight]{bg}{cqust_logo.pdf}
 % \setbeamertemplate{background}{\pgfuseimage{bg}}
 
 \pgfdeclareimage[height=0.8cm]{logo}{cqust_logo.pdf}
@@ -146,8 +142,8 @@
 %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 中文字体%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newcommand{\song}{\CJKfamily{song}}
-%\newcommand{\hei}{\CJKfamily{hei}}
+% \newcommand{\song}{\CJKfamily{song}}
+% \newcommand{\hei}{\CJKfamily{hei}}
 %\newcommand{\kai}{\CJKfamily{kai}}
 %\newcommand{\fs}{\CJKfamily{fs}}
 
@@ -209,9 +205,9 @@
 %   affiliation.
 \institute[重庆科技学院\quad 电气工程学院] % (optional, but mostly needed)
 {重庆科技学院\quad 电气工程学院}
-\date {\scriptsize{2020-08-01}}%日期强定
+% \date {\scriptsize{2020-08-01}}%日期强定
 %\date{\scriptsize{\today} }%{{\the\year}年{\the\month}月{\the\day}日}%% 日期自动生成
-% \date{\today}
+\date{\today}
 
 
 \begin{frame} % 封面
@@ -1461,7 +1457,19 @@ transmission.一定频率和极化的电波与特定媒质条件相匹配，将�
 
 \begin{frame}
 \frametitle{\textsc{Direct modes}}
+黑体
+\heiti 黑体
+\songti 宋体
+\fangsong 仿宋
+\kaishu 楷书
 
+\rmfamily This is the word `buffer' with original.
+
+\setmainfont{Times New Roman}
+This is the word `buffer' with Times New Roman font.
+
+\setmainfont{Arial}
+This is the word `buffer' with Arial font.
 
 \rightline{\hyperlink{sec:6}{\beamerreturnbutton{back}} }
 \end{frame}
